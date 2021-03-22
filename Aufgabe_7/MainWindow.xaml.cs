@@ -24,65 +24,78 @@ namespace Aufgabe_7
         int boarderRectangle;
         int remainingTime;
         int points;
-        DispatcherTimer timerSpielzeit;
+        DispatcherTimer timerGameTime;
+        Canvas myCanvas = new Canvas();
         public MainWindow()
         {
             InitializeComponent();
             boarderRectangle = 25;
             remainingTime = 120;
             points = 0;
-            timerSpielzeit = new DispatcherTimer();
+            Rectangle rectangle = new Rectangle();
+
+            timerGameTime = new DispatcherTimer();
             //das Intervall setzen
-            timerSpielzeit.Interval = TimeSpan.FromMilliseconds(1000);
+            timerGameTime.Interval = TimeSpan.FromMilliseconds(1000);
             //die Methode für das Ereignis zuweisen
-            timerSpielzeit.Tick += new EventHandler(Timer_Spielzeit);
-            timerSpielzeit.Start();
+            timerGameTime.Tick += new EventHandler(Timer_Spielzeit);
+            timerGameTime.Start();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ZeichneSpielfeld();
-            //timerSpielzeit = new DispatcherTimer();
-            ////das Intervall setzen
-            //timerSpielzeit.Interval = TimeSpan.FromMilliseconds(1000);
-            ////die Methode für das Ereignis zuweisen
-            //timerSpielzeit.Tick += new EventHandler(Timer_Spielzeit);
-            //Duration duration = newDuration(TimeSpan.FromSeconds(20));
-            //DoubleAnimation doubleanimation = newDoubleAnimation(200.0, duration);
-            //PBar.BeginAnimation(ProgressBar.ValueProperty, doubleanimation);
-            zeitAnzeige.Content = remainingTime;
-            punktAnzeige.Content = points;
+            DrawPlayground();
+            timeDisplay.Content = remainingTime;
+            pointDisplay.Content = points;
         }
-        void ZeichneSpielfeld()
+        void DrawPlayground()
         {
             //der Balken oben
-            ZeichneRechteck(new Point(0, 0), spielfeld.ActualWidth, boarderRectangle);
+            DrawRectangle(new Point(0, 0), spielfeld.ActualWidth, boarderRectangle);
             //der Balken rechts
-            ZeichneRechteck(new Point(spielfeld.ActualWidth - boarderRectangle, 0), boarderRectangle, spielfeld.ActualHeight);
+            DrawRectangle(new Point(spielfeld.ActualWidth - boarderRectangle, 0), boarderRectangle, spielfeld.ActualHeight);
             //der Balken unten
-            ZeichneRechteck(new Point(0, spielfeld.ActualHeight - boarderRectangle), spielfeld.ActualWidth, boarderRectangle);
+            DrawRectangle(new Point(0, spielfeld.ActualHeight - boarderRectangle), spielfeld.ActualWidth, boarderRectangle);
             //und der Balken links
-            ZeichneRechteck(new Point(0, 0), boarderRectangle, spielfeld.ActualHeight);
+            DrawRectangle(new Point(0, 0), boarderRectangle, spielfeld.ActualHeight);
         }
-        void ZeichneRechteck(Point position, double laenge, double breite)
+        void DrawRectangle(Point position, double width, double height)
         {
-            //einen neuen Balken erzeugen
-            Rectangle balken = new Rectangle();
-            Canvas.SetLeft(balken, position.X);
-            Canvas.SetTop(balken, position.Y);
-            balken.Width = laenge;
-            balken.Height = breite;
-            SolidColorBrush fuellung = new SolidColorBrush(Colors.Red);
-            balken.Fill = fuellung;
-            //der Balken hat den Namen grenze
-            balken.Name = "Grenze";
-            //und hinzufügen
-            spielfeld.Children.Add(balken);
+            ////einen neuen Balken erzeugen
+            Rectangle rectangle = new Rectangle();
+            Canvas.SetLeft(rectangle, position.X);
+            Canvas.SetTop(rectangle, position.Y);
+            rectangle.Width = width;
+            rectangle.Height = height;
+            SolidColorBrush filling = new SolidColorBrush(Colors.Beige);
+            rectangle.Fill = filling;
+            rectangle.Name = "Boarder";
+            spielfeld.Children.Add(rectangle);
         }
         private void Timer_Spielzeit(object sender, EventArgs e)
         {
-            //die Zeit erhöhen und neu anzeigen
+            Random random = new Random(GetHashCode());
+            int groesse = 20;
             remainingTime = remainingTime - 1;
-            zeitAnzeige.Content = remainingTime;
+            timeDisplay.Content = remainingTime;
+            //int maxX = (int)Canvas.ActualWidth - groesse;
+            //int maxY = (int)Canvas.ActualHeight - groesse;
+            //positionieren
+            Color farbe = Colors.Red;
+            Ellipse kreis;
+            Canvas meinCanvas = new Canvas();
+
+            kreis = new Ellipse();
+
+            Canvas.SetLeft(kreis, random.Next(50, 100));
+            Canvas.SetTop(kreis, random.Next(50, 100));
+
+            //die Größe setzen
+            kreis.Width = groesse;
+            kreis.Height = groesse;
+            //Farbe setzen
+            SolidColorBrush fuellung = new SolidColorBrush(farbe);
+            kreis.Fill = fuellung;
+            myCanvas.Children.Add(kreis);
         }
     }
 }

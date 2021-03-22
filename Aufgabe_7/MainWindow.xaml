@@ -14,7 +14,7 @@
     <Canvas x:Name="spielfeld" Grid.Row="1" />
     <ProgressBar Name="PBar" Grid.Row="0" Margin="10,10,0,13"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="20" Minimum="0" Maximum="10" Value="10">
     </ProgressBar>
-    <Label x:Name="punktAnzeige" Content="0" HorizontalAlignment="Right" Margin="0,20,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
-    <Label x:Name="zeitAnzeige" Content="0" HorizontalAlignment="Right" Margin="0,45,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
+    <Label x:Name="pointDisplay" Content="0" HorizontalAlignment="Right" Margin="0,20,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
+    <Label x:Name="timeDisplay" Content="0" HorizontalAlignment="Right" Margin="0,45,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
   </Grid>
 </Window>

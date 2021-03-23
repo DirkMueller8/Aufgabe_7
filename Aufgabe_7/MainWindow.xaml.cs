@@ -25,14 +25,13 @@ namespace Aufgabe_7
         int remainingTime;
         int points;
         DispatcherTimer timerGameTime;
-        Canvas myCanvas = new Canvas();
+
         public MainWindow()
         {
             InitializeComponent();
             boarderRectangle = 25;
             remainingTime = 120;
             points = 0;
-            Rectangle rectangle = new Rectangle();
 
             timerGameTime = new DispatcherTimer();
             //das Intervall setzen
@@ -46,6 +45,7 @@ namespace Aufgabe_7
             DrawPlayground();
             timeDisplay.Content = remainingTime;
             pointDisplay.Content = points;
+
         }
         void DrawPlayground()
         {
@@ -60,8 +60,9 @@ namespace Aufgabe_7
         }
         void DrawRectangle(Point position, double width, double height)
         {
-            ////einen neuen Balken erzeugen
             Rectangle rectangle = new Rectangle();
+
+            ////einen neuen Balken erzeugen
             Canvas.SetLeft(rectangle, position.X);
             Canvas.SetTop(rectangle, position.Y);
             rectangle.Width = width;
@@ -77,17 +78,15 @@ namespace Aufgabe_7
             int groesse = 20;
             remainingTime = remainingTime - 1;
             timeDisplay.Content = remainingTime;
-            //int maxX = (int)Canvas.ActualWidth - groesse;
-            //int maxY = (int)Canvas.ActualHeight - groesse;
+            int maxX = (int)spielfeld.ActualWidth - groesse;
+            int maxY = (int)spielfeld.ActualHeight - groesse;
             //positionieren
             Color farbe = Colors.Red;
             Ellipse kreis;
-            Canvas meinCanvas = new Canvas();
-
             kreis = new Ellipse();
 
-            Canvas.SetLeft(kreis, random.Next(50, 100));
-            Canvas.SetTop(kreis, random.Next(50, 100));
+            Canvas.SetLeft(kreis, random.Next(boarderRectangle, maxX));
+            Canvas.SetTop(kreis, random.Next(boarderRectangle, maxY));
 
             //die Größe setzen
             kreis.Width = groesse;
@@ -95,7 +94,7 @@ namespace Aufgabe_7
             //Farbe setzen
             SolidColorBrush fuellung = new SolidColorBrush(farbe);
             kreis.Fill = fuellung;
-            myCanvas.Children.Add(kreis);
+            spielfeld.Children.Add(kreis);
         }
     }
 }

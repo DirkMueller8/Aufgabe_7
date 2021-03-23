@@ -25,6 +25,9 @@ namespace Aufgabe_7
         int remainingTime;
         int points;
         DispatcherTimer timerGameTime;
+        Random random = new Random();
+        Button btn = new Button();
+
 
         public MainWindow()
         {
@@ -74,27 +77,48 @@ namespace Aufgabe_7
         }
         private void Timer_Spielzeit(object sender, EventArgs e)
         {
-            Random random = new Random(GetHashCode());
-            int groesse = 20;
+
+            Button btn = new Button();
+            btn.Height = 40;
+            btn.Width = 70;
+            btn.Content = "Click me";
+            btn.Background = new SolidColorBrush(Colors.Orange);
+            btn.Foreground = new SolidColorBrush(Colors.Black);
+
+            int groesse = 35;
             remainingTime = remainingTime - 1;
             timeDisplay.Content = remainingTime;
             int maxX = (int)spielfeld.ActualWidth - groesse;
             int maxY = (int)spielfeld.ActualHeight - groesse;
-            //positionieren
-            Color farbe = Colors.Red;
-            Ellipse kreis;
-            kreis = new Ellipse();
 
-            Canvas.SetLeft(kreis, random.Next(boarderRectangle, maxX));
-            Canvas.SetTop(kreis, random.Next(boarderRectangle, maxY));
+            Canvas.SetLeft(btn, random.Next(boarderRectangle, maxX));
+            Canvas.SetTop(btn, random.Next(boarderRectangle, maxY));
 
-            //die Größe setzen
-            kreis.Width = groesse;
-            kreis.Height = groesse;
-            //Farbe setzen
-            SolidColorBrush fuellung = new SolidColorBrush(farbe);
-            kreis.Fill = fuellung;
-            spielfeld.Children.Add(kreis);
+            spielfeld.Children.Add(btn);
         }
+        //private void Timer_Spielzeit(object sender, EventArgs e)
+        //{
+        //    //Random random = new Random(GetHashCode());
+        //    int groesse = 20;
+        //    remainingTime = remainingTime - 1;
+        //    timeDisplay.Content = remainingTime;
+        //    int maxX = (int)spielfeld.ActualWidth - groesse;
+        //    int maxY = (int)spielfeld.ActualHeight - groesse;
+        //    //positionieren
+        //    Color farbe = Colors.Red;
+        //    Ellipse kreis;
+        //    kreis = new Ellipse();
+
+        //    Canvas.SetLeft(kreis, random.Next(boarderRectangle, maxX));
+        //    Canvas.SetTop(kreis, random.Next(boarderRectangle, maxY));
+
+        //    //die Größe setzen
+        //    kreis.Width = groesse;
+        //    kreis.Height = groesse;
+        //    //Farbe setzen
+        //    SolidColorBrush fuellung = new SolidColorBrush(farbe);
+        //    kreis.Fill = fuellung;
+        //    spielfeld.Children.Add(kreis);
+        //}
     }
 }

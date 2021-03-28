@@ -72,11 +72,12 @@ namespace Aufgabe_7
         }
         private void Timer_Game_Duration(object sender, EventArgs e)
         {
-            int maxLeft = Convert.ToInt32(spielfeld.ActualWidth - button1.Width - boarderRectangle);
-            int maxTop = Convert.ToInt32(spielfeld.ActualHeight - button1.Height - boarderRectangle);
+            int maxX = Convert.ToInt32(spielfeld.ActualWidth - button1.Width - boarderRectangle);
+            int maxY = Convert.ToInt32(spielfeld.ActualHeight - button1.Height - boarderRectangle);
+
             remainingTime = remainingTime - 1;
             timeDisplay.Content = remainingTime;
-            button1.Margin = new Thickness(random.Next(maxLeft), random.Next(maxTop), 0, 0);
+            button1.Margin = new Thickness(random.Next(maxX), random.Next(maxY), 0, 0);
 
             PBar.Value = remainingTime;
         }

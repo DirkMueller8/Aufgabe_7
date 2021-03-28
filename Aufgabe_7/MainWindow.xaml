@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aufgabe_7"
         mc:Ignorable="d"
-  Title="Catch the Button" Height="600" Width="800" Loaded="Window_Loaded" Topmost="True" ResizeMode="NoResize">
+  Title="Catch the Button" Height="600" Width="800" Loaded="Window_Loaded" >
+  
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="40"/>
@@ -14,6 +15,7 @@
     <Canvas x:Name="spielfeld" Grid.Row="1" />
     <ProgressBar Name="PBar" Grid.Row="0" Margin="10,10,0,13"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="20" Minimum="0" Maximum="10" Value="10">
     </ProgressBar>
+    <Button Content="Button" Grid.Row="1" Height="23" HorizontalAlignment="Center" Margin="0,0,0,0" Name="button1" Width="75" IsTabStop="False" Click="button1_Click_1"/>
     <Label x:Name="pointDisplay" Content="0" HorizontalAlignment="Right" Margin="0,20,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
     <Label x:Name="timeDisplay" Content="0" HorizontalAlignment="Right" Margin="0,45,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
   </Grid>

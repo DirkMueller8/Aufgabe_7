@@ -85,13 +85,13 @@ namespace Aufgabe_7
             //btn.Foreground = new SolidColorBrush(Colors.Black);
 
             //int groesse = 35;
-            int maxLeft = Convert.ToInt32(spielfeld.ActualWidth - button1.Width);
-            int maxTop = Convert.ToInt32(spielfeld.ActualHeight - button1.Height);
+            int maxLeft = Convert.ToInt32(spielfeld.ActualWidth - button1.Width- boarderRectangle);
+            int maxTop = Convert.ToInt32(spielfeld.ActualHeight - button1.Height - boarderRectangle);
             remainingTime = remainingTime - 1;
             timeDisplay.Content = remainingTime;
             button1.Margin = new Thickness(random.Next(maxLeft), random.Next(maxTop), 0, 0);
 
-            //ProgressBar
+            PBar.Value = remainingTime;
             //int maxX = (int)spielfeld.ActualWidth - groesse;
             //int maxY = (int)spielfeld.ActualHeight - groesse;
 
@@ -118,6 +118,8 @@ namespace Aufgabe_7
             int maxTop = Convert.ToInt32(spielfeld.ActualHeight - button1.Height);
             Random rand = new Random();
             button1.Margin = new Thickness(rand.Next(maxLeft), rand.Next(maxTop), 0, 0);
+            points++;
+            pointDisplay.Content = points;
         }
         //private void Timer_Spielzeit(object sender, EventArgs e)
         //{

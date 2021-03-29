@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aufgabe_7"
         mc:Ignorable="d"
-  Title="Catch the Button" Height="600" Width="800" Loaded="Window_Loaded" >
-  
+  Title="Catch the Button" Height="600" Width="800" Loaded="Window_Loaded" Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="40"/>
@@ -15,7 +15,7 @@
     <Canvas x:Name="spielfeld" Grid.Row="1" />
     <ProgressBar Name="PBar" Grid.Row="0" Margin="10,10,0,13"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="20" Minimum="0" Maximum="120" Value="120">
     </ProgressBar>
-    <Button Content="Button" Grid.Row="1" Height="23" Margin="0,0,0,0" Name="button1" Width="75" IsTabStop="False" Click="button1_Click_1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Button Content="Button" Grid.Row="1" Height="23" Margin="20,20,0,0" Name="btnCatchMe" Width="75" IsTabStop="False" Click="button1_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     <Label x:Name="pointDisplay" Content="0" HorizontalAlignment="Right" Margin="0,420,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.397,11.42"/>
     <Label x:Name="timeDisplay" Content="0" HorizontalAlignment="Right" Margin="0,460,30,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
   </Grid>

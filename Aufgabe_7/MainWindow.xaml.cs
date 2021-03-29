@@ -32,7 +32,7 @@ namespace Aufgabe_7
         {
             InitializeComponent();
             boarderRectangle = 25;
-            remainingTime = 120;
+            remainingTime = 12;
             points = 0;
 
             timerGameTime = new DispatcherTimer();
@@ -43,53 +43,59 @@ namespace Aufgabe_7
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DrawPlayground();
+            //DrawPlayground();
             timeDisplay.Content = remainingTime;
             pointDisplay.Content = points;
             button1.Content = "Press me";
             button1.Background = new SolidColorBrush(Colors.Orange);
             button1.Foreground = new SolidColorBrush(Colors.Black);
         }
-        void DrawPlayground()
-        {
-            DrawRectangle(new Point(0, 0), spielfeld.ActualWidth, boarderRectangle);
-            DrawRectangle(new Point(spielfeld.ActualWidth - boarderRectangle, 0), boarderRectangle, spielfeld.ActualHeight);
-            DrawRectangle(new Point(0, spielfeld.ActualHeight - boarderRectangle), spielfeld.ActualWidth, boarderRectangle);
-            DrawRectangle(new Point(0, 0), boarderRectangle, spielfeld.ActualHeight);
-        }
-        void DrawRectangle(Point position, double width, double height)
-        {
-            Rectangle rectangle = new Rectangle();
 
-            Canvas.SetLeft(rectangle, position.X);
-            Canvas.SetTop(rectangle, position.Y);
-            rectangle.Width = width;
-            rectangle.Height = height;
-            SolidColorBrush filling = new SolidColorBrush(Colors.Beige);
-            rectangle.Fill = filling;
-            rectangle.Name = "Boarder";
-            spielfeld.Children.Add(rectangle);
-        }
         private void Timer_Game_Duration(object sender, EventArgs e)
         {
+            // Determine boarders of button placement for the random function:
             int maxX = Convert.ToInt32(spielfeld.ActualWidth - button1.Width - boarderRectangle);
             int maxY = Convert.ToInt32(spielfeld.ActualHeight - button1.Height - boarderRectangle);
 
+            // Reduce time to be displayed by -1:
             remainingTime = remainingTime - 1;
             timeDisplay.Content = remainingTime;
-            button1.Margin = new Thickness(random.Next(maxX), random.Next(maxY), 0, 0);
 
+            button1.Margin = new Thickness(random.Next(maxX), random.Next(maxY), 0, 0);
             PBar.Value = remainingTime;
+
+            string message = "Time has run out, unfortunately you lost.";
+            string caption = "Time";
+
+            // When game time is out stop the game and present message to user:
+            if (remainingTime <= 0)
+            {
+                timerGameTime.Stop();
+                // When user confirms then close form:
+                if (MessageBox.Show(message, caption, MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    Close();
+                }
+            }
         }
 
         private void button1_Click_1(object sender, RoutedEventArgs e)
         {
-            int maxLeft = Convert.ToInt32(spielfeld.ActualWidth - button1.Width - boarderRectangle);
-            int maxTop = Convert.ToInt32(spielfeld.ActualHeight - button1.Height - boarderRectangle);
-            Random rand = new Random();
-            button1.Margin = new Thickness(rand.Next(maxLeft), rand.Next(maxTop), 0, 0);
             points++;
             pointDisplay.Content = points;
+            string message = "Congratulations, you reached 10 points!";
+            string caption = "Game finished, you won!";
+
+            // When 10 points were collected stop the game and present message box to user:
+            if (points > 9)
+            {
+                timerGameTime.Stop();
+                // When user confirms then close form:
+                if (MessageBox.Show(message,caption, MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    Close();
+                }
+            }
         }
     }
 }
